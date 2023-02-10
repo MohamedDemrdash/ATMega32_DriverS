@@ -1,15 +1,9 @@
- /******************************************************************************
+/*
+ * DIO_program.c
  *
- * Module: Dio
- *
- * Layer : MCAL
- *
- * File Name: Dio.c
- *
- * Description: Source file for ATMEGA32A Microcontroller - Dio Driver
- *
- * Author: Mohamed Demrdash
- ******************************************************************************/ 
+ * Created: 2/6/2023 9:20:05 PM
+ *  Author: Mohamed Demrdash
+ */ 
 
 #include "../../utilities/REGISTER.h"
 #include "../../utilities/STD_Types.h"
