@@ -11,27 +11,47 @@
 
 #include "../../utilities/STD_Types.h"
 
+
+// Port Defines
+#define  DIO_PORTA  0
+#define  DIO_PORTB  1
+#define  DIO_PORTC  2
+#define  DIO_PORTD  3
+
+//Port Direction
 #define  PORT_OUT    0xFF
 #define  PORT_IN     0x00
 
+//Port Value
 #define  PORT_HIGH   0xFF
 #define  PORT_LOW    0x00
 
-void DIO_set_pin_dir(uint8_t port,uint8_t pin,uint8_t dir);
+typedef struct{
+	uint8_t Port : 2  ;
+	uint8_t Num  : 3  ;
+	uint8_t Dir  : 1  ;	
+	uint8_t Val  : 1  ;
+}DIO_Type;
 
-void DIO_write_pin(uint8_t port,uint8_t pin,uint8_t val);
 
-void DIO_toggle_pin(uint8_t port,uint8_t pin);
+//Function to control Pins 
+void DIO_VoidSetPinDir(DIO_Type PIN);
 
-uint8_t DIO_u8read_pin(uint8_t port,uint8_t pin);
+void DIO_VoidWritePin(DIO_Type PIN);
 
-void DIO_set_port_dir(uint8_t port,uint8_t val);
+void DIO_VoidTogglePin(DIO_Type PIN);
 
-void DIO_write_port(uint8_t port,uint8_t val);
+uint8_t DIO_Uint8ReadPin(DIO_Type PIN);
 
-unsigned DIO_u8read_port(uint8_t port);
 
-void DIO_toggle_port(uint8_t port);
+//Function to control Ports
+void DIO_VoidSetPortDir(uint8_t Port,uint8_t Port_Dir);
+
+void DIO_VoidWritePort(uint8_t Port,uint8_t Port_Val);
+
+uint8_t DIO_Uint8ReadPort(uint8_t Port);
+
+void DIO_VoidTogglePort(uint8_t Port);
 
 
 

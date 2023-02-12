@@ -10,262 +10,233 @@
 #include "../../utilities/BIT_Math.h"
 #include "DIO_interface.h"
 
-void DIO_set_pin_dir(uint8_t port,uint8_t pin,uint8_t dir)
+
+//Function to control Pins 
+void DIO_VoidSetPinDir(DIO_Type PIN)
 {
-	switch (port)
+	switch (PIN.Port)
 	{
-		case 'A' :
-		case 'a' :
+		case DIO_PORTA :
 		{
-			if(dir != 0)
+			if(PIN.Dir != 0)
 			{
-				SET_BIT(DDRA,pin);
+				SET_BIT(DDRA,PIN.Num);
 			}
 			else
 			{
-				CLEAR_BIT(DDRA,pin);
+				CLEAR_BIT(DDRA,PIN.Num);
 			}
 			break;
 		}
-		case 'B' :
-		case 'b' :
+		case DIO_PORTB :
 		{
-			if(dir != 0)
+			if(PIN.Dir != 0)
 			{
-				SET_BIT(DDRB,pin);
+				SET_BIT(DDRB,PIN.Num);
 			}
 			else
 			{
-				CLEAR_BIT(DDRB,pin);
+				CLEAR_BIT(DDRB,PIN.Num);
 			}
 			break;
 		}
-		case 'C' :
-		case 'c' :
+		case DIO_PORTC :
 		{
-			if(dir != 0)
+			if(PIN.Dir != 0)
 			{
-				SET_BIT(DDRC,pin);
+				SET_BIT(DDRC,PIN.Num);
 			}
 			else
 			{
-				CLEAR_BIT(DDRC,pin);
+				CLEAR_BIT(DDRC,PIN.Num);
 			}
 			break;
 		}
-		case 'D' :
-		case 'd' :
+		case DIO_PORTD :
 		{
-			if(dir != 0)
+			if(PIN.Dir != 0)
 			{
-				SET_BIT(DDRD,pin);
+				SET_BIT(DDRD,PIN.Num);
 			}
 			else
 			{
-				CLEAR_BIT(DDRD,pin);
+				CLEAR_BIT(DDRD,PIN.Num);
 			}
 			break;
 		}		
 	}
 }
 
-void DIO_write_pin(uint8_t port,uint8_t pin,uint8_t val)
+void DIO_VoidWritePin(DIO_Type PIN)
 {
-	switch(port)
+	switch(PIN.Port)
 	{
-		case 'A':
-		case 'a':
+		case DIO_PORTA :
 		{
-			if(val != 0)
+			if(PIN.Val != 0)
 			{
-				SET_BIT(PORTA,pin);
+				SET_BIT(PORTA,PIN.Num);
 			}
-				else
+			else
 			{
-				CLEAR_BIT(PORTA,pin);
+				CLEAR_BIT(PORTA,PIN.Num);
 			}
 			break;			
 		}
-		case 'B':
-		case 'b':
+		case DIO_PORTB :
 		{
-			if(val != 0)
+			if(PIN.Val != 0)
 			{
-				SET_BIT(PORTB,pin);
+				SET_BIT(PORTB,PIN.Num);
 			}
 			else
 			{
-				CLEAR_BIT(PORTB,pin);
+				CLEAR_BIT(PORTB,PIN.Num);
 			}
 			break;		
 		}
-		case 'C':
-		case 'c':
+		case DIO_PORTC :
 		{
-			if(val != 0)
+			if(PIN.Val != 0)
 			{
-				SET_BIT(PORTC,pin);
+				SET_BIT(PORTC,PIN.Num);
 			}
 			else
 			{
-				CLEAR_BIT(PORTC,pin);
+				CLEAR_BIT(PORTC,PIN.Num);
 			}
 			break;
 		}
-		case 'D':
-		case 'd':
+		case DIO_PORTD :
 		{
-			if(val != 0)
+			if(PIN.Val != 0)
 			{
-				SET_BIT(PORTD,pin);
+				SET_BIT(PORTD,PIN.Num);
 			}
 			else
 			{
-				CLEAR_BIT(PORTD,pin);
+				CLEAR_BIT(PORTD,PIN.Num);
 			}
 			break;
 		}
 	}
 }
 
-void DIO_toggle_pin(uint8_t port,uint8_t pin)
+void DIO_VoidTogglePin(DIO_Type PIN)
 {
-	switch(port)
+	switch(PIN.Port)
 	{
-		case 'A':
-		case 'a':
-			TOG_BIT(PORTA,pin);
+		case DIO_PORTA :
+			TOG_BIT(PORTA,PIN.Num);
 			break;
-		case 'B':
-		case 'b':
-			TOG_BIT(PORTB,pin);
+		case DIO_PORTB :
+			TOG_BIT(PORTB,PIN.Num);
 			break;
-		case 'C':
-		case 'c':
-			TOG_BIT(PORTC,pin);
+		case DIO_PORTC :
+			TOG_BIT(PORTC,PIN.Num);
 			break;
-		case 'D':
-		case 'd':
-			TOG_BIT(PORTD,pin);
+		case DIO_PORTD :
+			TOG_BIT(PORTD,PIN.Num);
 			break;	
 	}	
 }
 
-uint8_t DIO_u8read_pin(uint8_t port,uint8_t pin)
+uint8_t DIO_Uint8ReadPin(DIO_Type PIN)
 {
-	unsigned char val;
-	switch(port)
+	switch(PIN.Port)
 	{
-		case 'A':
-		case 'a':
-			val = READ_BIT(PINA,pin);
+		case DIO_PORTA :
+			PIN.Val = READ_BIT(PINA,PIN.Num);
 			break;
-		case 'B':
-		case 'b':
-		val = READ_BIT(PINB,pin);
-		break;
-		case 'C':
-		case 'c':
-		val = READ_BIT(PINC,pin);
-		break;
-		case 'D':
-		case 'd':
-		val = READ_BIT(PIND,pin);
-		break;
+		case DIO_PORTB :
+			PIN.Val = READ_BIT(PINB,PIN.Num);
+			break;
+		case DIO_PORTC :
+			PIN.Val = READ_BIT(PINC,PIN.Num);
+			break;
+		case DIO_PORTD :
+			PIN.Val = READ_BIT(PIND,PIN.Num);
+			break;
 	}
-	return val;
+	return PIN.Val;
 }
 
-void DIO_set_port_dir(uint8_t port,uint8_t val)
+
+//Function to control Ports
+void DIO_VoidSetPortDir(uint8_t Port,uint8_t Port_Dir)
 {
-	switch(port)
+	switch(Port)
 	{
-		case 'A':
-		case 'a':
-			DDRA = val;
+		case DIO_PORTA :
+			DDRA = Port_Dir;
 			break;
-		case 'B':
-		case 'b':
-			DDRB = val;
+		case DIO_PORTB :
+			DDRB = Port_Dir;
 			break;
-		case 'C':
-		case 'c':
-			DDRC = val;
+		case DIO_PORTC :
+			DDRC = Port_Dir;
 			break;
-		case 'D':
-		case 'd':
-			DDRD = val;
+		case DIO_PORTD :
+			DDRD = Port_Dir;
 			break;
 	}
 }
 
-void DIO_write_port(uint8_t port,uint8_t val)
+void DIO_VoidWritePort(uint8_t Port,uint8_t Port_Val)
 {
-	switch(port)
+	switch(Port)
 	{
-		case 'A':
-		case 'a':
-		PORTA = val;
-		break;
-		case 'B':
-		case 'b':
-		PORTB = val;
-		break;
-		case 'C':
-		case 'c':
-		PORTB = val;
-		break;
-		case 'D':
-		case 'd':
-		PORTD = val;
-		break;
+		case DIO_PORTA :
+			PORTA = Port_Val;
+			break;
+		case DIO_PORTB :
+			PORTB = Port_Val;
+			break;
+		case DIO_PORTC :
+			PORTC = Port_Val;
+			break;
+		case DIO_PORTD :
+			PORTD = Port_Val;
+			break;
 	}
 }
 
-unsigned DIO_u8read_port(uint8_t port)
+uint8_t DIO_Uint8ReadPort(uint8_t Port)
 {
-	unsigned char val;
-	switch(port)
+	uint8_t val;
+	switch(Port)
 	{
-		case 'A':
-		case 'a':
+		case DIO_PORTA :
 			val = PINA;
 			break;
-		case 'B':
-		case 'b':
+		case DIO_PORTB :
 			val = PINB;
 			break;
-		case 'C':
-		case 'c':
+		case DIO_PORTC :
 			val = PINC;
 			break;
-		case 'D':
-		case 'd':
+		case DIO_PORTD :
 			val = PIND;
 			break;
 	}
 	return val;
 }
 
-void DIO_toggle_port(uint8_t port)
+void DIO_VoidTogglePort(uint8_t Port)
 {
-	switch(port)
+	switch(Port)
 	{
-		case 'A':
-		case 'a':
-			PORTA ^= 0xFF;
+		case DIO_PORTA :
+			PORTA ^= PORT_HIGH;
 			break;
-		case 'B':
-		case 'b':
-			PORTB ^= 0xFF;
+		case DIO_PORTB :
+			PORTB ^= PORT_HIGH;
 			break;
-		case 'C':
-		case 'c':
-			PORTC ^= 0xFF;
+		case DIO_PORTC :
+			PORTC ^= PORT_HIGH;
 			break;
-		case 'D':
-		case 'd':
-			PORTD ^= 0xFF;
+		case DIO_PORTD :
+			PORTD ^= PORT_HIGH;
 			break;
 	}
 }
