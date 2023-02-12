@@ -18,7 +18,7 @@
 #include "SSD_private.h"
 
 
-static uint8_t Numbers[10] = FOUR_PIN_MODE ;
+static uint8_t Numbers[10] = SSD_NUMBER_ARR ;
 
 
 
